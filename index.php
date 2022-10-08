@@ -16,19 +16,16 @@ if (
 //melange le tableau des mots
 if ($_SESSION['nbre_tours'] == 0) {
     shuffle($mots);
-    foreach ($mots as $mot) {
-        $mot;
-    }
-    //copie du tableau des mots dans session mot
+    $mot = $mots[0];
     $_SESSION['mot'] = $mot;
 }
 $mot_choisi_to_upper = strtoupper($_SESSION['mot']);
 $mot_choisi = str_split($mot_choisi_to_upper);
 ?>
 <main class="mt-5">
-    <div class="row mt-5 w-75 ml-auto mr-auto">
-        <div class="col-7">
-            <div class="intro w-75 ml-auto mr-auto">
+    <div class="row mt-5 ml-auto mr-auto" style="width: 80%;margin-left:auto;margin-right:auto">
+        <div class="col-lg-8">
+            <div class="intro ml-auto mr-auto">
                 <h2>Régles du jeu</h2>
                 <p>
                     Le but du jeu est de trouver le mot avant que le dessin ne soit fini.<br>
@@ -37,7 +34,7 @@ $mot_choisi = str_split($mot_choisi_to_upper);
                 </p>
             </div>
             <hr>
-            <div class="row w-75 ml-auto mr-auto justify-content-center mt-5 mb-5 mb-5">
+            <div class="row ml-auto mr-auto justify-content-center mt-5 mb-5 mb-5">
                 <?php
                 foreach ($mot_choisi as $lettre) {
                     echo '<div class="col col-lettre">';
@@ -68,7 +65,7 @@ $mot_choisi = str_split($mot_choisi_to_upper);
                 <div class="text-center">
                     <h3>You are the best !</h3>
                     <p>Il s'agit bien de : <?= $mot_choisi_to_upper ?></p>
-                    <a href="includes/unset.php">Rejouer</a>
+                    <a href="includes/unset.php"><img src="assets/img/jouer.png"></a>
                 </div>
             <?php
             } elseif ($_SESSION['nbre_tours'] < 11) {
@@ -76,7 +73,7 @@ $mot_choisi = str_split($mot_choisi_to_upper);
                 <form method="post" action="traitement.php" class="w-50 ml-auto mr-auto">
                     <br />
                     Tapez ici votre lettre :
-                    <input type="text" name="lettre" required autofocus>
+                    <input type="text" name="lettre" required autofocus maxlength="1">
                     <button type="submit" class="btn btn-success" hidden>Ok</button>
                     <br />
                     <a href="includes/unset.php" class="float-right">Annuler</a>
@@ -87,14 +84,14 @@ $mot_choisi = str_split($mot_choisi_to_upper);
                 <div class="text-center">
                     <h3>Oups !</h3>
                     <p>Il s'agissait de : <?= $mot_choisi_to_upper ?></p>
-                    <a href="includes/unset.php">Rejouer</a>
+                    <a href="includes/unset.php"><img src="assets/img/jouer.png"></a>
                 </div>
             <?php
             }
             ?>
             <hr class="mt-5">
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <div id="imageId">
                 <?php
                 if ($implode_mot == $implode_lettres) {
@@ -112,7 +109,7 @@ $mot_choisi = str_split($mot_choisi_to_upper);
                 }
                 ?>
             </div>
-            <div class="non w-75 ml-auto mr-auto">
+            <div class="ml-auto mr-auto">
                 <?php
                 foreach ($_SESSION['lettres'] as $lettre_dedans) {
                     echo $lettre_dedans;
